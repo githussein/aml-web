@@ -99,8 +99,8 @@ export function ScreeningPage() {
         </section>
 
         {/* Dataset Status Cards */}
-        <section aria-label="Dataset status" className="max-w-2xl mx-auto">
-          <div className="flex gap-4 justify-center flex-wrap">
+        <section aria-label="Dataset status" className="max-w-4xl mx-auto w-full">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <SourceStatusBadge meta={providerMeta.un} />
             <SourceStatusBadge meta={providerMeta.uae} />
           </div>

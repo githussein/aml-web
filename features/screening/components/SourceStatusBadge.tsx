@@ -44,12 +44,12 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
 
   return (
     <div
-      className="bg-white dark:bg-slate-900 rounded-2xl p-4 flex flex-col gap-2 min-w-[220px] shadow-sm ring-1 ring-slate-200 dark:ring-slate-800"
+      className="bg-white dark:bg-slate-900 rounded-2xl p-5 flex flex-col gap-3 min-w-[280px] flex-1 max-w-[400px] shadow-sm ring-1 ring-slate-200 dark:ring-slate-800"
       role="status"
       aria-label={`${meta.source} sanctions list status`}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+      <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
         <div className={`w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 ${style.icon}`}>
           {meta.source === 'UN' ? (
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -71,15 +71,15 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between gap-2">
-            <span className={`text-[13px] font-bold ${style.title} truncate`}>
+          <div className="flex items-center justify-between gap-3">
+            <span className={`text-[15px] font-bold ${style.title}`}>
               {meta.source === 'UN' ? 'UN Consolidated' : 'UAE Terrorist List'}
             </span>
             {isLoading ? (
               <Spinner size="sm" />
             ) : (
               <div
-                className={`w-2 h-2 rounded-full ${isError ? 'bg-red-500' : style.dot} ${isReady ? 'animate-pulse' : ''} shadow-sm`}
+                className={`w-2.5 h-2.5 rounded-full ${isError ? 'bg-red-500' : style.dot} ${isReady ? 'animate-pulse' : ''} shadow-sm shrink-0`}
                 title={meta.status}
               />
             )}
@@ -88,36 +88,36 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
       </div>
 
       {/* Status detail */}
-      <div className="pt-1">
+      <div className="pt-2">
         {isLoading && (
-          <p className="text-[12px] text-slate-500 dark:text-slate-400 font-medium">Connecting...</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Connecting...</p>
         )}
         {isError && (
-          <p className="text-[12px] text-red-600 dark:text-red-400 font-medium leading-snug">
+          <p className="text-sm text-red-600 dark:text-red-400 font-medium leading-snug">
             {meta.error ?? 'Connection failed'}
           </p>
         )}
         {isReady && (
-          <div className="flex flex-col gap-1">
-            <p className="text-[12px] text-slate-600 dark:text-slate-400 font-medium flex justify-between">
+          <div className="flex flex-col gap-1.5">
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-medium flex justify-between">
               <span className="text-slate-400 dark:text-slate-500">Records</span>
               <span className="text-slate-900 dark:text-slate-200">{meta.recordCount.toLocaleString()}</span>
             </p>
             {meta.version && (
-              <p className="text-[12px] text-slate-600 dark:text-slate-400 font-medium flex justify-between">
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium flex justify-between">
                 <span className="text-slate-400 dark:text-slate-500">Version</span>
-                <span className="text-slate-900 dark:text-slate-200 truncate max-w-[100px]" title={meta.version}>{meta.version}</span>
+                <span className="text-slate-900 dark:text-slate-200 truncate max-w-[150px]" title={meta.version}>{meta.version}</span>
               </p>
             )}
             {meta.loadedAt && (
-              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-2">
                 Synced at {formatTime(meta.loadedAt)}
               </p>
             )}
           </div>
         )}
         {meta.status === 'idle' && (
-          <p className="text-[12px] text-slate-400 dark:text-slate-500">Offline</p>
+          <p className="text-sm text-slate-400 dark:text-slate-500">Offline</p>
         )}
       </div>
     </div>

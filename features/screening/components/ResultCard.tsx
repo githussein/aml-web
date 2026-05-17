@@ -28,13 +28,13 @@ function ScoreBar({ score }: { score: number }) {
 
   return (
     <div className="flex items-center gap-3" title={`Match score: ${pct}%`}>
-      <div className="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden max-w-[120px]">
+      <div className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden max-w-[140px]">
         <div
           className={`h-full ${color} rounded-full transition-all`}
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="text-[12px] font-semibold text-slate-500 dark:text-slate-400 tabular-nums">{pct}% Match</span>
+      <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 tabular-nums">{pct}% Match</span>
     </div>
   );
 }
@@ -61,7 +61,7 @@ export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardPro
       <div className="flex items-start gap-4">
         {/* Rank Badge */}
         <div className={`
-          flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold shrink-0 mt-0.5
+          flex items-center justify-center w-8 h-8 rounded-full text-[13px] font-bold shrink-0 mt-0.5
           ${rank <= 3 ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}
         `}>
           {rank}
@@ -71,13 +71,13 @@ export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardPro
           {/* Header Row */}
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-[16px] leading-tight break-words group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-[18px] leading-tight break-words group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
                 {record.name}
               </h3>
               
               {/* Aliases preview */}
               {record.aliases.length > 0 && (
-                <p className="text-[13px] text-slate-500 dark:text-slate-400 mt-1.5 leading-snug">
+                <p className="text-[14px] text-slate-500 dark:text-slate-400 mt-2 leading-snug">
                   <span className="font-medium text-slate-400 dark:text-slate-500">AKA: </span>
                   {record.aliases.slice(0, 3).join(' • ')}
                   {record.aliases.length > 3 && (
@@ -94,19 +94,19 @@ export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardPro
           </div>
 
           {/* Meta row */}
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-3 flex-wrap">
             {record.type && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[13px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                 {record.type}
               </span>
             )}
             {record.program && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 truncate max-w-[250px]" title={record.program}>
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[13px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 truncate max-w-[300px]" title={record.program}>
                 {record.program}
               </span>
             )}
             {record.nationality && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[13px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                 {record.nationality}
               </span>
             )}
@@ -114,8 +114,8 @@ export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardPro
 
           {/* Remarks preview */}
           {record.remarks && (
-            <p className="text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
-              {truncate(record.remarks, 120)}
+            <p className="text-[14px] text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+              {truncate(record.remarks, 150)}
             </p>
           )}
 

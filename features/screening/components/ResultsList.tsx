@@ -92,14 +92,14 @@ export function ResultsList({
   }
 
   return (
-    <div className="space-y-3" role="list" aria-label="Sanctions screening results">
+    <div className="space-y-4" role="list" aria-label="Sanctions screening results">
       {/* Results header */}
       <div className="flex items-center justify-between mb-6 px-2">
-        <p className="text-[13px] text-slate-500 dark:text-slate-400">
+        <p className="text-[15px] text-slate-500 dark:text-slate-400">
           Found <span className="text-slate-900 dark:text-slate-100 font-bold">{results.length}</span> result{results.length !== 1 ? 's' : ''} for{' '}
           <span className="text-slate-900 dark:text-slate-100 font-semibold">"{query}"</span>
         </p>
-        <p className="text-[12px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Sorted by Relevance</p>
+        <p className="text-[13px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Sorted by Relevance</p>
       </div>
 
       {results.map((result, idx) => (
