@@ -80,7 +80,7 @@ export function ScreeningPage() {
         <section aria-label="Sanctions name search" className="flex flex-col items-center text-center space-y-8">
           <div className="space-y-3">
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
-              Entity Screening
+              Individual & Entity Screening
             </h2>
             <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
               Scan individuals and entities across the UN Security Council Consolidated List and the UAE Terrorist List in real-time.
