@@ -9,13 +9,13 @@ interface BadgeProps {
 }
 
 const VARIANT_CLASSES: Record<NonNullable<BadgeProps['variant']>, string> = {
-  un:      'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-700/10',
-  uae:     'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/10',
-  exact:   'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-700/10',
-  alias:   'bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-600/20',
-  similar: 'bg-slate-50 text-slate-600 ring-1 ring-inset ring-slate-500/10',
-  demo:    'bg-amber-100 text-amber-800 ring-1 ring-inset ring-amber-600/20 shadow-sm',
-  neutral: 'bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-500/10',
+  un:      'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-500/30',
+  uae:     'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/10 dark:ring-emerald-500/30',
+  exact:   'bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 ring-1 ring-inset ring-violet-700/10 dark:ring-violet-500/30',
+  alias:   'bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-400 ring-1 ring-inset ring-amber-600/20 dark:ring-amber-500/30',
+  similar: 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 ring-1 ring-inset ring-slate-500/10 dark:ring-slate-600',
+  demo:    'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-500 ring-1 ring-inset ring-amber-600/20 dark:ring-amber-500/30 shadow-sm',
+  neutral: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 ring-1 ring-inset ring-slate-500/10 dark:ring-slate-600',
 };
 
 const SIZE_CLASSES = {

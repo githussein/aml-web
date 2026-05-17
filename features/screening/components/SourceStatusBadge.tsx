@@ -27,12 +27,12 @@ const SOURCE_STYLES = {
   UN: {
     dot: 'bg-blue-500',
     icon: 'text-blue-500',
-    title: 'text-slate-900',
+    title: 'text-slate-900 dark:text-slate-100',
   },
   UAE: {
     dot: 'bg-emerald-500',
     icon: 'text-emerald-500',
-    title: 'text-slate-900',
+    title: 'text-slate-900 dark:text-slate-100',
   },
 };
 
@@ -44,13 +44,13 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
 
   return (
     <div
-      className="bg-white rounded-2xl p-4 flex flex-col gap-2 min-w-[220px] shadow-sm ring-1 ring-slate-200"
+      className="bg-white dark:bg-slate-900 rounded-2xl p-4 flex flex-col gap-2 min-w-[220px] shadow-sm ring-1 ring-slate-200 dark:ring-slate-800"
       role="status"
       aria-label={`${meta.source} sanctions list status`}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
-        <div className={`w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0 ${style.icon}`}>
+      <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div className={`w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 ${style.icon}`}>
           {meta.source === 'UN' ? (
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/>
@@ -90,34 +90,34 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
       {/* Status detail */}
       <div className="pt-1">
         {isLoading && (
-          <p className="text-[12px] text-slate-500 font-medium">Connecting...</p>
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 font-medium">Connecting...</p>
         )}
         {isError && (
-          <p className="text-[12px] text-red-600 font-medium leading-snug">
+          <p className="text-[12px] text-red-600 dark:text-red-400 font-medium leading-snug">
             {meta.error ?? 'Connection failed'}
           </p>
         )}
         {isReady && (
           <div className="flex flex-col gap-1">
-            <p className="text-[12px] text-slate-600 font-medium flex justify-between">
-              <span className="text-slate-400">Records</span>
-              <span className="text-slate-900">{meta.recordCount.toLocaleString()}</span>
+            <p className="text-[12px] text-slate-600 dark:text-slate-400 font-medium flex justify-between">
+              <span className="text-slate-400 dark:text-slate-500">Records</span>
+              <span className="text-slate-900 dark:text-slate-200">{meta.recordCount.toLocaleString()}</span>
             </p>
             {meta.version && (
-              <p className="text-[12px] text-slate-600 font-medium flex justify-between">
-                <span className="text-slate-400">Version</span>
-                <span className="text-slate-900 truncate max-w-[100px]" title={meta.version}>{meta.version}</span>
+              <p className="text-[12px] text-slate-600 dark:text-slate-400 font-medium flex justify-between">
+                <span className="text-slate-400 dark:text-slate-500">Version</span>
+                <span className="text-slate-900 dark:text-slate-200 truncate max-w-[100px]" title={meta.version}>{meta.version}</span>
               </p>
             )}
             {meta.loadedAt && (
-              <p className="text-[10px] text-slate-400 mt-1">
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
                 Synced at {formatTime(meta.loadedAt)}
               </p>
             )}
           </div>
         )}
         {meta.status === 'idle' && (
-          <p className="text-[12px] text-slate-400">Offline</p>
+          <p className="text-[12px] text-slate-400 dark:text-slate-500">Offline</p>
         )}
       </div>
     </div>

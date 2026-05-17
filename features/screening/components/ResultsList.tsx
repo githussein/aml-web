@@ -17,7 +17,7 @@ interface ResultsListProps {
 }
 
 const SearchIcon = () => (
-  <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4 shadow-sm ring-1 ring-blue-100">
+  <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 shadow-sm ring-1 ring-blue-100 dark:ring-blue-900/50">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.35-4.35" />
@@ -26,7 +26,7 @@ const SearchIcon = () => (
 );
 
 const NoResultsIcon = () => (
-  <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-4 shadow-sm ring-1 ring-slate-200">
+  <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 mb-4 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.35-4.35" />
@@ -36,7 +36,7 @@ const NoResultsIcon = () => (
 );
 
 const ErrorIcon = () => (
-  <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center text-red-500 mb-4 shadow-sm ring-1 ring-red-100">
+  <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 dark:text-red-400 mb-4 shadow-sm ring-1 ring-red-100 dark:ring-red-900/50">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10" />
       <path d="M12 8v4M12 16h.01" />
@@ -66,7 +66,7 @@ export function ResultsList({
     return (
       <div className="flex flex-col items-center justify-center py-32 space-y-4">
         <Spinner size="lg" />
-        <p className="text-sm font-medium text-slate-500 animate-pulse">Scanning watchlists...</p>
+        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 animate-pulse">Scanning watchlists...</p>
       </div>
     );
   }
@@ -95,11 +95,11 @@ export function ResultsList({
     <div className="space-y-3" role="list" aria-label="Sanctions screening results">
       {/* Results header */}
       <div className="flex items-center justify-between mb-6 px-2">
-        <p className="text-[13px] text-slate-500">
-          Found <span className="text-slate-900 font-bold">{results.length}</span> result{results.length !== 1 ? 's' : ''} for{' '}
-          <span className="text-slate-900 font-semibold">"{query}"</span>
+        <p className="text-[13px] text-slate-500 dark:text-slate-400">
+          Found <span className="text-slate-900 dark:text-slate-100 font-bold">{results.length}</span> result{results.length !== 1 ? 's' : ''} for{' '}
+          <span className="text-slate-900 dark:text-slate-100 font-semibold">"{query}"</span>
         </p>
-        <p className="text-[12px] font-semibold text-slate-400 uppercase tracking-wider">Sorted by Relevance</p>
+        <p className="text-[12px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Sorted by Relevance</p>
       </div>
 
       {results.map((result, idx) => (

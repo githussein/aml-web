@@ -34,9 +34,9 @@ export function SearchBar({ query, onQueryChange, onSearch, isLoading, isDisable
       {/* Subtle backdrop shadow for the search bar */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2rem] blur opacity-10 group-hover:opacity-20 transition duration-500" />
       
-      <div className="relative flex bg-white rounded-full p-1.5 shadow-sm ring-1 ring-slate-900/5 hover:ring-slate-900/10 focus-within:!ring-blue-500 focus-within:!ring-2 transition-all">
+      <div className="relative flex bg-white dark:bg-slate-900 rounded-full p-1.5 shadow-sm ring-1 ring-slate-900/5 dark:ring-slate-700 hover:ring-slate-900/10 dark:hover:ring-slate-600 focus-within:!ring-blue-500 dark:focus-within:!ring-blue-500 focus-within:!ring-2 transition-all">
         <div className="flex-1 relative flex items-center">
-          <div className="absolute left-5 text-slate-400 pointer-events-none">
+          <div className="absolute left-5 text-slate-400 dark:text-slate-500 pointer-events-none">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
@@ -54,7 +54,7 @@ export function SearchBar({ query, onQueryChange, onSearch, isLoading, isDisable
             disabled={isDisabled}
             placeholder="Search by entity name or alias..."
             aria-label="Search sanctions lists"
-            className="w-full pl-12 pr-4 py-3.5 bg-transparent text-slate-900 text-[15px] font-medium placeholder:text-slate-400 placeholder:font-normal focus:outline-none disabled:opacity-50"
+            className="w-full pl-12 pr-4 py-3.5 bg-transparent text-slate-900 dark:text-slate-100 text-[15px] font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500 placeholder:font-normal focus:outline-none disabled:opacity-50"
           />
         </div>
         <button
@@ -62,7 +62,7 @@ export function SearchBar({ query, onQueryChange, onSearch, isLoading, isDisable
           type="submit"
           disabled={isLoading || isDisabled || !query.trim()}
           aria-label="Run sanctions search"
-          className="px-8 py-3.5 rounded-full text-[15px] font-semibold bg-blue-600 text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+          className="px-8 py-3.5 rounded-full text-[15px] font-semibold bg-blue-600 text-white shadow-sm hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
         >
           {isLoading ? (
             <>

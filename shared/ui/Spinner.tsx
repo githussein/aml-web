@@ -19,9 +19,9 @@ export function Spinner({ size = 'md', label }: SpinnerProps) {
       <div
         role="status"
         aria-label={label ?? 'Loading...'}
-        className={`${SIZE_CLASSES[size]} rounded-full border-blue-100 border-t-blue-600 animate-spin`}
+        className={`${SIZE_CLASSES[size]} rounded-full border-blue-100 dark:border-blue-900/50 border-t-blue-600 dark:border-t-blue-400 animate-spin`}
       />
-      {label && <span className="text-sm font-medium text-slate-600 animate-pulse">{label}</span>}
+      {label && <span className="text-sm font-medium text-slate-600 dark:text-slate-400 animate-pulse">{label}</span>}
     </div>
   );
 }
