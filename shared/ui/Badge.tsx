@@ -9,25 +9,23 @@ interface BadgeProps {
 }
 
 const VARIANT_CLASSES: Record<NonNullable<BadgeProps['variant']>, string> = {
-  un:      'bg-blue-950 text-blue-300 border border-blue-800 ring-1 ring-blue-900',
-  uae:     'bg-emerald-950 text-emerald-300 border border-emerald-800 ring-1 ring-emerald-900',
-  exact:   'bg-violet-950 text-violet-300 border border-violet-800',
-  alias:   'bg-amber-950 text-amber-300 border border-amber-800',
-  similar: 'bg-slate-800 text-slate-400 border border-slate-700',
-  demo:    'bg-amber-500/10 text-amber-400 border border-amber-500/30',
-  neutral: 'bg-slate-800 text-slate-400 border border-slate-700',
+  un:      'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-700/10',
+  uae:     'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/10',
+  exact:   'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-700/10',
+  alias:   'bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-600/20',
+  similar: 'bg-slate-50 text-slate-600 ring-1 ring-inset ring-slate-500/10',
+  demo:    'bg-amber-100 text-amber-800 ring-1 ring-inset ring-amber-600/20 shadow-sm',
+  neutral: 'bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-500/10',
 };
 
 const SIZE_CLASSES = {
-  sm: 'px-1.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
-  md: 'px-2 py-1 text-xs font-semibold tracking-wide uppercase',
+  sm: 'px-2 py-0.5 text-[11px] font-semibold',
+  md: 'px-2.5 py-1 text-[12px] font-semibold',
 };
 
 export function Badge({ label, variant = 'neutral', size = 'sm' }: BadgeProps) {
   return (
-    <span
-      className={`inline-flex items-center rounded-sm ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]}`}
-    >
+    <span className={`inline-flex items-center justify-center rounded-md ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]}`}>
       {label}
     </span>
   );

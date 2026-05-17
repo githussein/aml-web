@@ -2,8 +2,8 @@
 
 @theme inline {
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --color-background: #020617; /* slate-950 */
-  --color-foreground: #f1f5f9; /* slate-100 */
+  --color-background: #F9FAFB; /* gray-50 */
+  --color-foreground: #111827; /* gray-900 */
 }
 
 * {
@@ -11,39 +11,39 @@
 }
 
 html {
-  background-color: #020617;
+  background-color: #F9FAFB;
 }
 
 body {
-  background-color: #020617;
-  color: #f1f5f9;
+  background-color: #F9FAFB;
+  color: #111827;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar for modern light theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
+  background: #E5E7EB;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #D1D5DB;
 }
 
-/* Smooth transitions on focus rings */
+/* Global focus ring */
 *:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #2563EB; /* blue-600 */
   outline-offset: 2px;
   border-radius: 4px;
 }

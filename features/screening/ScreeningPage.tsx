@@ -25,96 +25,89 @@ export function ScreeningPage() {
   } = useScreening();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900">
 
-      {/* Top bar */}
-      <header className="border-b border-slate-800 bg-slate-950/95 backdrop-blur-sm sticky top-0 z-30">
-        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+      {/* Top Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Logo mark */}
-            <div className="w-7 h-7 rounded-md bg-blue-600 flex items-center justify-center shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            {/* SaaS Logo Mark */}
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-inner">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
             </div>
             <div>
-              <h1 className="text-sm font-semibold text-slate-100 leading-none">AML Screening</h1>
-              <p className="text-[10px] text-slate-500 leading-none mt-0.5">Sanctions Name Screening</p>
+              <h1 className="text-[15px] font-bold text-slate-900 tracking-tight leading-none">
+                Compliance<span className="text-blue-600">OS</span>
+              </h1>
+              <p className="text-[11px] font-medium text-slate-500 leading-none mt-1">Sanctions Screening</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Badge label="Demo / Prototype" variant="demo" size="md" />
+          <div className="flex items-center gap-4">
+            <Badge label="Prototype" variant="demo" size="md" />
+            <div className="w-px h-6 bg-slate-200" />
             <button
               id="refresh-datasets-button"
               onClick={refresh}
               disabled={isPreloading}
               title="Reload datasets"
-              aria-label="Refresh datasets"
-              className="p-1.5 rounded text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition-colors disabled:opacity-40"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all disabled:opacity-40"
             >
               <svg
                 width="14" height="14" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                className={isPreloading ? 'animate-spin' : ''}
+                className={`text-slate-400 group-hover:text-blue-600 ${isPreloading ? 'animate-spin' : ''}`}
               >
                 <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
                 <path d="M3 3v5h5" />
                 <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
                 <path d="M16 16h5v5" />
               </svg>
+              {isPreloading ? 'Syncing...' : 'Sync Data'}
             </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-8 space-y-8">
+      <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
 
-        {/* Search section */}
-        <section aria-label="Sanctions name search" className="space-y-4">
-          <div className="space-y-1">
-            <h2 className="text-lg font-semibold text-slate-100">Sanctions Name Screening</h2>
-            <p className="text-sm text-slate-500">
-              Search the UN Security Council Consolidated List and UAE Terrorist List simultaneously.
+        {/* Hero Search Section */}
+        <section aria-label="Sanctions name search" className="flex flex-col items-center text-center space-y-8">
+          <div className="space-y-3">
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              Entity Screening
+            </h2>
+            <p className="text-base text-slate-600 max-w-xl mx-auto">
+              Scan individuals and entities across the UN Security Council Consolidated List and the UAE Terrorist List in real-time.
             </p>
           </div>
-          <SearchBar
-            query={query}
-            onQueryChange={setQuery}
-            onSearch={runSearch}
-            isLoading={status === 'loading'}
-            isDisabled={isPreloading}
-          />
-
-          {/* Disclaimer */}
-          <div className="flex items-start gap-2 rounded-lg border border-amber-900/30 bg-amber-950/10 px-3.5 py-2.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-amber-500 mt-0.5">
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-              <path d="M12 9v4M12 17h.01"/>
-            </svg>
-            <p className="text-[12px] text-amber-600 leading-snug">
-              <strong className="text-amber-500">Demo only.</strong>{' '}
-              This tool is a prototype for evaluation purposes. Data is not guaranteed to be real-time or complete.
-              Do not use for live compliance decisions.
-            </p>
+          
+          <div className="w-full max-w-2xl">
+            <SearchBar
+              query={query}
+              onQueryChange={setQuery}
+              onSearch={runSearch}
+              isLoading={status === 'loading'}
+              isDisabled={isPreloading}
+            />
           </div>
         </section>
 
-        {/* Dataset status */}
-        <section aria-label="Dataset status" className="space-y-2">
-          <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-widest">Data Sources</p>
-          <div className="flex gap-3 flex-wrap">
+        {/* Dataset Status Cards */}
+        <section aria-label="Dataset status" className="max-w-2xl mx-auto">
+          <div className="flex gap-4 justify-center flex-wrap">
             <SourceStatusBadge meta={providerMeta.un} />
             <SourceStatusBadge meta={providerMeta.uae} />
           </div>
         </section>
 
-        {/* Divider */}
-        <div className="border-t border-slate-800" />
+        <div className="w-24 h-px bg-slate-200 mx-auto" />
 
-        {/* Results */}
-        <section aria-label="Screening results">
+        {/* Results Area */}
+        <section aria-label="Screening results" className="max-w-3xl mx-auto pb-20">
           <ResultsList
             results={results}
             status={status}
@@ -126,7 +119,6 @@ export function ScreeningPage() {
         </section>
       </main>
 
-      {/* Detail panel */}
       <DetailPanel result={selectedResult} onClose={clearSelection} />
     </div>
   );
