@@ -16,19 +16,19 @@ import { UNListProvider } from '@/providers/un/UNListProvider';
 import { UAEListProvider } from '@/providers/uae/UAEListProvider';
 
 // ─── Fuse.js Configuration ────────────────────────────────────────────────────
-// Keys are weighted so name matches rank higher than alias or remarks matches.
+// Keys are weighted so primary name matches rank higher than aliases.
+// For true Name Screening, we ONLY search names and aliases, not remarks or nationalities.
 const FUSE_OPTIONS: IFuseOptions<SanctionRecord> = {
   keys: [
-    { name: 'name', weight: 0.5 },
-    { name: 'aliases', weight: 0.35 },
-    { name: 'program', weight: 0.05 },
-    { name: 'remarks', weight: 0.05 },
-    { name: 'nationality', weight: 0.05 },
+    { name: 'name', weight: 0.7 },
+    { name: 'aliases', weight: 0.5 },
   ],
-  threshold: 0.4,          // 0 = exact, 1 = anything. 0.4 is permissive but not noisy.
+  // 0.25 is much stricter than 0.4. Less noise, requires closer matches.
+  threshold: 0.25,
   includeScore: true,
-  minMatchCharLength: 2,
-  ignoreLocation: true,    // Match anywhere in the string, not just at the start
+  // Require at least 3 characters before attempting to match
+  minMatchCharLength: 3,
+  ignoreLocation: true,
   useExtendedSearch: false,
 };
 
@@ -82,7 +82,11 @@ export async function search(query: string): Promise<SearchResult[]> {
   const fuse = new Fuse(allRecords, FUSE_OPTIONS);
   const fuseResults = fuse.search(query);
 
-  return fuseResults.map((result): SearchResult => {
+  // Take only the top 50 most relevant results to avoid noise
+  const topResults = fuseResults.slice(0, 50);
+
+  // Map to our SearchResult format
+  const mappedResults = topResults.map((result): SearchResult => {
     const rawScore = result.score ?? 1;
     // Fuse score is 0 (perfect) to 1 (no match). Invert for display.
     const score = parseFloat((1 - rawScore).toFixed(3));
@@ -92,6 +96,9 @@ export async function search(query: string): Promise<SearchResult[]> {
       matchType: classifyMatch(query, result.item, score),
     };
   });
+
+  // Strict cutoff: Only return results with at least a 40% match score
+  return mappedResults.filter(res => res.score >= 0.4);
 }
 
 /**
