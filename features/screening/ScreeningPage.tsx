@@ -82,8 +82,18 @@ export function ScreeningPage() {
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
               Individual & Entity Screening
             </h2>
-            <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
-              Scan individuals and entities across the UN Security Council Consolidated List and the UAE Terrorist List in real-time.
+            <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-loose">
+              Scan individuals and entities across the
+              <span className="inline-flex items-center mx-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-200/50 dark:border-blue-500/20 shadow-sm text-blue-700 dark:text-blue-300 font-semibold text-[13px] transition-all hover:-translate-y-0.5 hover:shadow-md cursor-default">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-blue-400 mr-2 animate-pulse" />
+                UN Security Council Consolidated List
+              </span>
+              and the
+              <span className="inline-flex items-center mx-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-500/10 dark:to-teal-500/10 border border-emerald-200/50 dark:border-emerald-500/20 shadow-sm text-emerald-700 dark:text-emerald-300 font-semibold text-[13px] transition-all hover:-translate-y-0.5 hover:shadow-md cursor-default">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 mr-2 animate-pulse" />
+                UAE Terrorist List
+              </span>
+              in real-time.
             </p>
           </div>
           
