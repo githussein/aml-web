@@ -8,6 +8,7 @@ import { DetailPanel } from '@/features/screening/components/DetailPanel';
 import { SourceStatusBadge } from '@/features/screening/components/SourceStatusBadge';
 import { Badge } from '@/shared/ui/Badge';
 import { ThemeToggle } from '@/shared/ui/ThemeToggle';
+import { Footer } from '@/shared/ui/Footer';
 
 export function ScreeningPage() {
   const {
@@ -26,7 +27,7 @@ export function ScreeningPage() {
   } = useScreening();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-blue-900 dark:selection:text-blue-100">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-blue-900 dark:selection:text-blue-100">
 
       {/* Top Header */}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 shadow-sm dark:shadow-none">
@@ -74,7 +75,7 @@ export function ScreeningPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-12 space-y-10">
 
         {/* Hero Search Section */}
         <section aria-label="Sanctions name search" className="flex flex-col items-center text-center space-y-8">
@@ -130,6 +131,8 @@ export function ScreeningPage() {
           />
         </section>
       </main>
+
+      <Footer />
 
       <DetailPanel result={selectedResult} onClose={clearSelection} />
     </div>
