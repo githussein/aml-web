@@ -16,7 +16,6 @@ export function Footer() {
           </span>
           <span className="hidden sm:inline text-slate-200 dark:text-slate-800">|</span>
           <span>&copy; {currentYear} All rights reserved.</span>
-          <span className="hidden sm:inline text-slate-200 dark:text-slate-800">|</span>
         </div>
 
         {/* Right Side: Legal Info (Deactivated) */}
