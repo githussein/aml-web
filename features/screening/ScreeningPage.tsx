@@ -71,6 +71,17 @@ export function ScreeningPage() {
               </svg>
               {isPreloading ? 'Syncing...' : 'Sync Data'}
             </button>
+            <button
+              title="Login"
+              aria-label="Login"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm hover:bg-blue-700 dark:hover:bg-blue-500 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
+            >
+              <span>Login</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
           </div>
         </div>
       </header>
@@ -97,7 +108,7 @@ export function ScreeningPage() {
               in real-time.
             </p>
           </div>
-          
+
           <div className="w-full max-w-2xl">
             <SearchBar
               query={query}
