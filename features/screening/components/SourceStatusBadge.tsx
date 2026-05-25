@@ -104,9 +104,9 @@ export function SourceStatusBadge({ meta }: SourceStatusBadgeProps) {
               <span className="text-slate-900 dark:text-slate-200">{meta.recordCount.toLocaleString()}</span>
             </p>
             {meta.version && (
-              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium flex justify-between">
-                <span className="text-slate-400 dark:text-slate-500">Version</span>
-                <span className="text-slate-900 dark:text-slate-200 truncate max-w-[150px]" title={meta.version}>{meta.version}</span>
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium flex justify-between gap-4">
+                <span className="text-slate-400 dark:text-slate-500 shrink-0">Version</span>
+                <span className="text-slate-900 dark:text-slate-200 truncate max-w-[250px]" title={meta.version}>{meta.version}</span>
               </p>
             )}
             {meta.loadedAt && (
