@@ -158,7 +158,7 @@ export function ScreeningPage() {
 
       <Footer />
 
-      <DetailPanel result={selectedResult} onClose={clearSelection} />
+      <DetailPanel result={selectedResult} query={query} onClose={clearSelection} />
     </div>
   );
 }

@@ -109,6 +109,7 @@ export function ResultsList({
           rank={idx + 1}
           isSelected={selectedResult?.record.id === result.record.id}
           onSelect={onSelectResult}
+          query={query}
         />
       ))}
     </div>

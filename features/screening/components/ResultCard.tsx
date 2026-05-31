@@ -4,12 +4,14 @@ import React from 'react';
 import type { SearchResult, MatchType } from '@/shared/types/sanctions';
 import { Badge } from '@/shared/ui/Badge';
 import { truncate } from '@/shared/lib/normalize';
+import { DownloadPdfButton } from './DownloadPdfButton';
 
 interface ResultCardProps {
   result: SearchResult;
   isSelected: boolean;
   onSelect: (result: SearchResult) => void;
   rank: number;
+  query: string;
 }
 
 const MATCH_BADGE_VARIANT: Record<MatchType, 'exact' | 'alias' | 'similar'> = {
@@ -39,18 +41,33 @@ function ScoreBar({ score }: { score: number }) {
   );
 }
 
-export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardProps) {
+export function ResultCard({ result, isSelected, onSelect, rank, query }: ResultCardProps) {
   const { record, score, matchType } = result;
   const sourceVariant = record.source === 'UN' ? 'un' : 'uae';
 
+  /**
+   * The outer element is a <div role="button"> so we can safely nest the
+   * <DownloadPdfButton> (a <button>) inside without invalid HTML.
+   * Keyboard interaction mirrors a real button: Enter / Space triggers selection.
+   */
+  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect(result);
+    }
+  }
+
   return (
-    <button
+    <div
       id={`result-card-${record.id}`}
+      role="button"
+      tabIndex={0}
       onClick={() => onSelect(result)}
+      onKeyDown={handleKeyDown}
       aria-pressed={isSelected}
       aria-label={`View details for ${record.name} from ${record.source} list`}
       className={`
-        w-full text-left rounded-2xl px-6 py-5 transition-all duration-200 group relative
+        w-full text-left rounded-2xl px-6 py-5 transition-all duration-200 group relative cursor-pointer
         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950
         ${isSelected
           ? 'bg-blue-50 dark:bg-blue-900/20 ring-1 ring-inset ring-blue-200 dark:ring-blue-500/30 shadow-sm'
@@ -119,12 +136,13 @@ export function ResultCard({ result, isSelected, onSelect, rank }: ResultCardPro
             </p>
           )}
 
-          {/* Score bar */}
-          <div className="pt-1">
+          {/* Score bar + PDF download */}
+          <div className="flex items-center justify-between pt-1">
             <ScoreBar score={score} />
+            <DownloadPdfButton result={result} query={query} variant="card" />
           </div>
         </div>
       </div>
-    </button>
+    </div>
   );
 }

@@ -3,9 +3,11 @@
 import React, { useEffect, useRef } from 'react';
 import type { SearchResult, Identifier } from '@/shared/types/sanctions';
 import { Badge } from '@/shared/ui/Badge';
+import { DownloadPdfButton } from './DownloadPdfButton';
 
 interface DetailPanelProps {
   result: SearchResult | null;
+  query: string;
   onClose: () => void;
 }
 
@@ -45,7 +47,7 @@ function IdentifierList({ identifiers }: { identifiers: Identifier[] }) {
   );
 }
 
-export function DetailPanel({ result, onClose }: DetailPanelProps) {
+export function DetailPanel({ result, query, onClose }: DetailPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -95,7 +97,9 @@ export function DetailPanel({ result, onClose }: DetailPanelProps) {
           <>
             {/* Header */}
             <div className="flex flex-col gap-4 p-6 sm:px-8 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0 relative">
-              <div className="absolute top-6 right-6">
+              <div className="absolute top-6 right-6 flex items-center gap-2">
+                {/* PDF download action — panel variant for more visual weight */}
+                <DownloadPdfButton result={result} query={query} variant="panel" />
                 <button
                   ref={closeButtonRef}
                   onClick={onClose}
