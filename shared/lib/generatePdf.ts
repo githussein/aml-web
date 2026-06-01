@@ -82,8 +82,10 @@ export async function generateAndDownloadPdf(data: PdfReportData): Promise<void>
   // Helpers
   // ------------------------------------------------------------------
 
+  const FOOTER_MARGIN = 14; // reserve space for footer + safe gap
+
   function checkPageBreak(neededHeight: number) {
-    if (y + neededHeight > PAGE_H - MARGIN) {
+    if (y + neededHeight > PAGE_H - FOOTER_MARGIN) {
       doc.addPage();
       y = MARGIN;
     }
@@ -222,21 +224,32 @@ export async function generateAndDownloadPdf(data: PdfReportData): Promise<void>
     data.matchScore >= 60 ? [59, 130, 246] :
     data.matchScore >= 40 ? [245, 158, 11] : [148, 163, 184];
 
-  doc.setFillColor(...scoreColor);
-  doc.roundedRect(MARGIN, y - 4, 36, 7, 1.5, 1.5, 'F');
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.text(`${data.matchScore}% Match`, MARGIN + 2, y + 0.5);
 
-  doc.setFillColor(80, 90, 130);
-  doc.roundedRect(MARGIN + 39, y - 4, 28, 7, 1.5, 1.5, 'F');
-  doc.text(data.matchType, MARGIN + 41, y + 0.5);
+  // Helper: draw a pill that auto-sizes to its text
+  function drawPill(
+    text: string,
+    startX: number,
+    fillColor: [number, number, number],
+  ): number {
+    const textW = doc.getTextWidth(text);
+    const pillW = textW + 6; // 3 mm padding each side
+    // Clamp so pill never bleeds past the right margin
+    const safeW = Math.min(pillW, PAGE_W - MARGIN - startX);
+    doc.setFillColor(...fillColor);
+    doc.roundedRect(startX, y - 4, safeW, 7, 1.5, 1.5, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.text(text, startX + 3, y + 0.5);
+    return startX + safeW + 3; // return next X position (pill width + gap)
+  }
 
+  let pillX = MARGIN;
+  pillX = drawPill(`${data.matchScore}% Match`, pillX, scoreColor);
+  pillX = drawPill(data.matchType, pillX, [80, 90, 130]);
   if (data.entityType) {
-    doc.setFillColor(148, 163, 184);
-    doc.roundedRect(MARGIN + 70, y - 4, 28, 7, 1.5, 1.5, 'F');
-    doc.text(data.entityType, MARGIN + 72, y + 0.5);
+    drawPill(data.entityType, pillX, [148, 163, 184]);
   }
   y += 10;
 
@@ -275,49 +288,57 @@ export async function generateAndDownloadPdf(data: PdfReportData): Promise<void>
   // Remarks
   if (data.remarks) {
     drawSectionHeading('Remarks & Context');
-    checkPageBreak(20);
-    // Light blue background box
-    const remarkLines = doc.splitTextToSize(data.remarks, CONTENT_W - 8);
-    const remarkH = remarkLines.length * (9 * 0.4) + 8;
-    checkPageBreak(remarkH);
+    const REMARK_PAD_X = 5;  // horizontal inner padding
+    const REMARK_PAD_TOP = 5; // space above first text line
+    const REMARK_PAD_BOT = 5; // space below last text line
+    const remarkLines = doc.splitTextToSize(data.remarks, CONTENT_W - REMARK_PAD_X * 2);
+    const lineH = 9 * 0.45;
+    const remarkH = remarkLines.length * lineH + REMARK_PAD_TOP + REMARK_PAD_BOT;
+    checkPageBreak(remarkH + 4);
     doc.setFillColor(239, 246, 255);
-    doc.roundedRect(MARGIN, y - 2, CONTENT_W, remarkH, 2, 2, 'F');
+    doc.roundedRect(MARGIN, y, CONTENT_W, remarkH, 2, 2, 'F');
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(30, 58, 138);
-    doc.text(remarkLines, MARGIN + 4, y + 3);
+    doc.text(remarkLines, MARGIN + REMARK_PAD_X, y + REMARK_PAD_TOP + lineH - 1);
     y += remarkH + 4;
   }
 
   // ------------------------------------------------------------------
   // 6. Disclaimer
   // ------------------------------------------------------------------
-  checkPageBreak(40);
-  y += 4;
-  drawHRule([200, 210, 230]);
-
-  doc.setFillColor(255, 251, 235);
-  doc.roundedRect(MARGIN, y, CONTENT_W, 28, 2, 2, 'F');
-  doc.setDrawColor(251, 191, 36);
-  doc.setLineWidth(0.5);
-  doc.roundedRect(MARGIN, y, CONTENT_W, 28, 2, 2, 'S');
-
-  doc.setFontSize(8);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(146, 64, 14);
-  doc.text('⚠  DISCLAIMER', MARGIN + 4, y + 6);
-
   const disclaimerText =
     'This report is generated for preliminary compliance screening purposes only and does not constitute a ' +
     'definitive legal determination. Results should be independently verified against the official source lists ' +
     'before any adverse action is taken. ComplianceOS is a prototype tool; organisations must apply their own ' +
     'due-diligence procedures in accordance with applicable AML/CFT regulations.';
 
+  // Calculate box height dynamically so text never overflows
+  doc.setFontSize(8);
+  const disclaimerLines = doc.splitTextToSize(disclaimerText, CONTENT_W - 10);
+  const disclaimerLineH = 8 * 0.45;
+  const DISC_PAD_TOP = 7;  // space for heading
+  const DISC_PAD_BOT = 5;
+  const disclaimerBoxH = DISC_PAD_TOP + disclaimerLines.length * disclaimerLineH + DISC_PAD_BOT + 4;
+
+  checkPageBreak(disclaimerBoxH + 12);
+  y += 4;
+  drawHRule([200, 210, 230]);
+
+  doc.setFillColor(255, 251, 235);
+  doc.roundedRect(MARGIN, y, CONTENT_W, disclaimerBoxH, 2, 2, 'F');
+  doc.setDrawColor(251, 191, 36);
+  doc.setLineWidth(0.5);
+  doc.roundedRect(MARGIN, y, CONTENT_W, disclaimerBoxH, 2, 2, 'S');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(146, 64, 14);
+  doc.text('⚠  DISCLAIMER', MARGIN + 4, y + 6);
+
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(120, 60, 20);
-  const disclaimerLines = doc.splitTextToSize(disclaimerText, CONTENT_W - 8);
-  doc.text(disclaimerLines, MARGIN + 4, y + 12);
-  y += 32;
+  doc.text(disclaimerLines, MARGIN + 4, y + DISC_PAD_TOP + disclaimerLineH + 1);
+  y += disclaimerBoxH + 4;
 
   // ------------------------------------------------------------------
   // Footer on every page
