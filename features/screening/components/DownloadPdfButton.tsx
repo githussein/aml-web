@@ -13,6 +13,39 @@ interface DownloadPdfButtonProps {
 
 type ButtonState = 'idle' | 'loading' | 'error';
 
+const DownloadIcon = () => (
+  <svg
+    width="13" height="13" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
+  </svg>
+);
+
+const SpinnerIcon = () => (
+  <svg
+    width="13" height="13" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+    className="animate-spin" aria-hidden="true"
+  >
+    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+  </svg>
+);
+
+const ErrorIcon = () => (
+  <svg
+    width="13" height="13" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 8v4M12 16h.01" />
+  </svg>
+);
+
 export function DownloadPdfButton({ result, query, variant = 'card' }: DownloadPdfButtonProps) {
   const [state, setState] = useState<ButtonState>('idle');
 
@@ -34,42 +67,6 @@ export function DownloadPdfButton({ result, query, variant = 'card' }: DownloadP
       setTimeout(() => setState('idle'), 3000);
     }
   }
-
-  // -----------------------------------------------------------------------
-  // Shared icon elements
-  // -----------------------------------------------------------------------
-  const DownloadIcon = () => (
-    <svg
-      width="13" height="13" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
-
-  const SpinnerIcon = () => (
-    <svg
-      width="13" height="13" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      className="animate-spin" aria-hidden="true"
-    >
-      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-    </svg>
-  );
-
-  const ErrorIcon = () => (
-    <svg
-      width="13" height="13" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 8v4M12 16h.01" />
-    </svg>
-  );
 
   // -----------------------------------------------------------------------
   // Card variant — compact inline button
