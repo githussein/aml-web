@@ -34,7 +34,7 @@ const FUSE_OPTIONS: IFuseOptions<SanctionRecord> = {
 
 // ─── Match type classification ────────────────────────────────────────────────
 
-function classifyMatch(query: string, record: SanctionRecord, score: number): MatchType {
+function classifyMatch(query: string, record: SanctionRecord): MatchType {
   const q = query.toLowerCase().trim();
   const name = record.name.toLowerCase();
   if (name === q) return 'Exact';
@@ -93,7 +93,7 @@ export async function search(query: string): Promise<SearchResult[]> {
     return {
       record: result.item,
       score,
-      matchType: classifyMatch(query, result.item, score),
+      matchType: classifyMatch(query, result.item),
     };
   });
 

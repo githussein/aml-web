@@ -54,7 +54,6 @@ export function useScreening(): ScreeningState & ScreeningActions {
 
   // Preload providers on mount
   useEffect(() => {
-    setIsPreloading(true);
     preloadProviders()
       .catch(console.error)
       .finally(() => {
