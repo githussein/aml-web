@@ -4,7 +4,21 @@
 
 ComplianceOS is a Next.js web application that lets compliance teams instantly screen individuals and entities against two authoritative sanctions databases. It uses [Fuse.js](https://www.fusejs.io/) with Jaro-Winkler scoring for sub-15 ms fuzzy matching, and generates downloadable PDF compliance reports via jsPDF.
 
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | [Next.js 16](https://nextjs.org) (App Router) + React 19 |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4 |
+| Fuzzy search | [Fuse.js 7](https://www.fusejs.io/) — Jaro-Winkler algorithm |
+| Data parsing | [PapaParse](https://www.papaparse.com/) — CSV stream parsing |
+| PDF export | [jsPDF](https://github.com/parallax/jsPDF) — client-side report generation |
+| Theming | [next-themes](https://github.com/pacocoursey/next-themes) — dark / light mode |
+
 ## Getting Started
+
 
 First, run the development server:
 
