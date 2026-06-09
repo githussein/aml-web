@@ -29,6 +29,17 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser. The main screening interface lives in `features/screening/ScreeningPage.tsx` and hot-reloads as you edit.
 
+
+## Project Structure
+
+```text
+├── app/                  # Next.js App Router configuration and routes
+├── features/             # Feature-specific modules (domain logic)
+│   └── screening/        # Screening search page, components, and hooks
+├── shared/               # Shared UI elements, typescript types, and utility functions
+└── providers/            # React context providers (e.g., ThemeProvider)
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
