@@ -162,18 +162,18 @@ export function ScreeningPage() {
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             <SourceStatusBadge meta={providerMeta.un} />
             <SourceStatusBadge meta={providerMeta.uae} />
-            
+
             {/* Compliance Engine Card */}
             <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-md rounded-2xl p-5 flex flex-col gap-3 min-w-[280px] flex-1 max-w-[400px] shadow-sm border border-slate-200/50 dark:border-slate-800/50 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:shadow-md hover:shadow-indigo-500/2 dark:hover:shadow-indigo-900/5 transition-all duration-300 relative group overflow-hidden">
               <div className="absolute -right-16 -top-16 w-32 h-32 rounded-full blur-2xl group-hover:scale-150 transition-all duration-500 pointer-events-none opacity-20 dark:opacity-30 bg-indigo-400" />
-              
+
               {/* Header */}
               <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-4 relative z-10">
                 <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-slate-800/80 flex items-center justify-center shrink-0 shadow-sm border border-slate-100 dark:border-slate-800 text-indigo-500 transition-colors group-hover:bg-white dark:group-hover:bg-slate-800">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="11" width="18" height="10" rx="2" ry="2"/>
-                    <path d="M12 2v9"/>
-                    <path d="M8 5h8"/>
+                    <rect x="3" y="11" width="18" height="10" rx="2" ry="2" />
+                    <path d="M12 2v9" />
+                    <path d="M8 5h8" />
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -197,11 +197,11 @@ export function ScreeningPage() {
                 </p>
                 <p className="text-sm text-slate-600 dark:text-slate-400 font-semibold flex justify-between">
                   <span className="text-slate-400 dark:text-slate-500 font-medium">Search Latency</span>
-                  <span className="text-slate-900 dark:text-slate-100 font-bold tabular-nums">&lt; 15 ms</span>
+                  <span className="text-slate-900 dark:text-slate-100 font-bold tabular-nums">&lt; 20 ms</span>
                 </p>
                 <p className="text-[11px] font-medium text-slate-400 dark:text-slate-500 mt-1 flex items-center gap-1.5 border-t border-slate-100 dark:border-slate-800/80 pt-2">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-slate-300 dark:text-slate-600">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   </svg>
                   <span>Fuzzy strictness: 0.25 index</span>
                 </p>
