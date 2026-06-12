@@ -43,11 +43,24 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. The main sc
 ## Key Features
 
 ### Fuzzy Matching Engine
-- **Search Scoring:** Integrated via `Fuse.js` configured with `JaroWinkler` distance thresholds to handle spelling errors, phonetic overlaps, and aliases.
-- **Latency:** Sub-15 ms indexing and retrieval logic entirely client-side.
-- **Strictness Level:** Strict compliance filters customizable directly in the matching service layer.
+- **Search Scoring**: Powered by [Fuse.js](https://www.fusejs.io/) using the **Jaro-Winkler distance** algorithm.
+- **Search Parameters**:
+  - **Strictness**: Configured with a threshold of `0.25` (lower thresholds require closer matches to minimize noisy results).
+  - **Field Weights**: Primary name matching is weighted at `0.7`, and alias matching is weighted at `0.5`.
+  - **Minimum Length**: Requires a minimum query length of `3` characters.
+  - **Cutoff Filter**: Only results with an inverted similarity score of $\ge 40\%$ (`0.4`) are shown.
+- **Latency**: Sub-15 ms indexing and matching, executed entirely client-side.
+
+### Dual Data Sources
+- **UN Consolidated List**:
+  - Fetched from the [UN Security Council Consolidated List](https://scsanctions.un.org/resources/xml/en/name/consolidated.xml).
+  - Proxied server-side via `app/api/un-sanctions/route.ts` to bypass browser CORS restrictions.
+  - Parsed on-the-fly using browser DOMParser and cached in `localStorage` for 24 hours.
+- **UAE Terrorist List**:
+  - Parsed from a local static asset [uae-terrorist-list.csv](file:///Users/mhussein/Develop/aml-web/public/data/uae-terrorist-list.csv) using `PapaParse`.
+  - Normalizes Arabic classifications into `Individual` (`شخص إرهابي`) vs. `Entity` (`كيان إرهابي`), with smart fallback rules for English/Arabic names.
 
 ### Client-Side Compliance Reports
 - Direct exporting of matching profiles using `jsPDF`.
-- Embeds metadata details, search context, and list indicators in structured layouts.
+- Embeds metadata details, query context, timestamp, matching score, list origin, and identifier documents (Passports, National IDs) in structured layouts.
 - Designed to run offline without backend-dependent report engines.
