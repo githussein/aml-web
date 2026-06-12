@@ -33,11 +33,40 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. The main sc
 ## Project Structure
 
 ```text
-├── app/                  # Next.js App Router configuration and routes
-├── features/             # Feature-specific modules (domain logic)
-│   └── screening/        # Screening search page, components, and hooks
-├── shared/               # Shared UI elements, typescript types, and utility functions
-└── providers/            # React context providers (e.g., ThemeProvider)
+├── app/
+│   ├── api/un-sanctions/route.ts   # Server-side proxy for UN Consolidated XML
+│   ├── globals.css                 # Global styling rules & dot grid backgrounds
+│   ├── layout.tsx                  # App layout wrapping ThemeProvider
+│   └── page.tsx                    # Landing route entry importing ScreeningPage
+│
+├── features/screening/
+│   ├── ScreeningPage.tsx           # Main page orchestrating the search experience
+│   ├── components/
+│   │   ├── DetailPanel.tsx         # Slide-over drawer detailing selected entity info
+│   │   ├── DownloadPdfButton.tsx   # PDF generator invoker widget
+│   │   ├── ResultCard.tsx          # Single search match row
+│   │   ├── ResultsList.tsx         # Results feed with loading & empty states
+│   │   ├── SearchBar.tsx           # Instant debounce-ready search input
+│   │   └── SourceStatusBadge.tsx   # Visual status / record count card
+│   ├── hooks/
+│   │   └── useScreening.ts         # State controller for loading & searching
+│   └── services/
+│       └── searchService.ts        # Fuse.js setup and search orchestrator
+│
+├── providers/
+│   ├── uae/UAEListProvider.ts      # CSV parser & normalizer logic for UAE List
+│   └── un/UNListProvider.ts        # XML parser & normalizer logic for UN List
+│
+├── shared/
+│   ├── lib/
+│   │   ├── cache.ts                # localStorage persistent cacher wrapper
+│   │   ├── generatePdf.ts          # jsPDF document layout generator
+│   │   └── normalize.ts            # Text cleaners and utility functions
+│   ├── types/                      # TypeScript definitions (sanctions, providers)
+│   └── ui/                         # Reusable UI parts (Badge, Spinner, ThemeToggle)
+│
+└── public/data/
+    └── uae-terrorist-list.csv      # UAE government source data (terrorist list)
 ```
 
 ## Key Features
