@@ -93,3 +93,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. The main sc
 - Direct exporting of matching profiles using `jsPDF`.
 - Embeds metadata details, query context, timestamp, matching score, list origin, and identifier documents (Passports, National IDs) in structured layouts.
 - Designed to run offline without backend-dependent report engines.
+
+---
+
+## 🔒 Production Considerations
+
+When transitioning from this prototype to production:
+1. **Server-side Search Engine**: Move `searchService.ts` and fuzzy logic computation to a secure backend microservice (e.g., Elasticsearch, OpenSearch, or a dedicated Go/Rust backend) to handle larger lists securely and performantly.
+2. **API Keys & Authorization**: Protect the search and download mechanisms behind standard Enterprise authentication (OAuth 2.0 / SAML).
+3. **Audit Logging**: Store search inputs and matches in an immutable audit ledger for compliance records (required by financial regulators).
